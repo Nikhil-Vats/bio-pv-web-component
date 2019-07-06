@@ -1,6 +1,6 @@
 #  Protein Viewer
 
-FIXME: fill out a description of your tool here! :)
+pv is a WebGL-based protein viewer whose goal is to once-for-all end the reign of Java applets on websites that require visualisation of protein structures. This repository implements [bio-pv](https://www.npmjs.com/package/bio-pv) as a Web Component.
 
 ## Component user docs: adding this component to your webpage
 
@@ -12,6 +12,8 @@ Hey! If you'd like to use this component on your webpage, please do the followin
 <script src="dist/bundle.js" type="module"></script>
 ```
 
+Also download the 1r6a.pdb file from pdbs folder.
+
 This links to the relevant scripts to define the component and fetch data.
 
 ### In the `<body>`
@@ -19,16 +21,9 @@ This links to the relevant scripts to define the component and fetch data.
 Where you want your WebComponent to appear, add the following:
 
 ```html
-<bio-pv-web
-   geneId="BRCA1">
+<bio-pv-web id="bio-pv-web>
  </bio-pv-web>
 ```
-
-Some notes on usage:
-
-- `geneId` value must must be an identifier for a gene. You can replace it
-with your favourite gene id instead!
-
 
 ## Licence
 
