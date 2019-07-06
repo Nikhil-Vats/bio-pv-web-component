@@ -1,8 +1,8 @@
-import 'hybrids/shim';
 import {
   define
 } from 'hybrids';
 import styles from '../dist/style.css';
+import pv from "../component-dist/bio-pv.min.js";
 /* Add any additional library imports you may need here. */
 
 
@@ -38,40 +38,75 @@ function initComponent(options) {
     get: (host, v) => v, // required to be recognized as property descriptor,
     set: () => {}, //required to stop TypeError: setting getter-only property "x"
     connect: (host, key) => {
+      var viewer = pv.Viewer(document.getElementById('bio-pv-web'), {
+        quality: 'medium',
+        width: 'auto',
+        height: 'auto',
+        antialias: true,
+        outline: true
+      });
+      var structure;
+      function lines() {
+        viewer.clear();
+        viewer.lines('structure', structure);
+      }
+      function cartoon() {
+        viewer.clear();
+        viewer.cartoon('structure', structure, { color: color.ssSuccession() });
+      }
+      function lineTrace() {
+        viewer.clear();
+        viewer.lineTrace('structure', structure);
+      }
+      function sline() {
+        viewer.clear();
+        viewer.sline('structure', structure);
+      }
 
-      /**********************************************************/
-      /************************ GUIDANCE ************************/
-      /**********************************************************/
-      /** If your component uses a traditional approach of     **/
-      /** accepting an element and updating its content,       **/
-      /** initialise it here and pass `host` as the argument   **/
-      /** for the element that would normally be passed to     **/
-      /** your script. If you are creating your element from   **/
-      /** scratch, see the hybrids.js docs and maybe delete    **/
-      /** this method and follow the hybrids examples instead  **/
-      /** https://github.com/hybridsjs/hybrids                 **/
-      /**                                                      **/
-      /** See also this example component for guidance:        **/
-      /* https://github.com/yochannah/biojs-webcomponent-prototype
-      /** or admire the minimal demo below                     **/
-      /**                                                      **/
-      /**********************************************************/
-      /****** WRITE CODE TO INITIALISE YOUR COMPONENT HERE ******/
-      /**********************************************************/
+      function tube() {
+        viewer.clear();
+        viewer.tube('structure', structure);
+      }
 
-      /** If you need to pass in a parameter - e.g. perhaps    **/
-      /** you have a gene visualisation so you want a gene id  **/
-      /** as a parameter, set the parameter as an attribute,   **/
-      /** and then get the attribute from host, like this:     **/
-      var myGeneId = host.getAttribute("geneId");
-      /** The line above would return BRCA1 if you've left the **/
-      /** default settings. Delete if needed. **/
-
-      host.innerHTML = "<div>A placeholder for a pretty" +
-        " visualisation for " + myGeneId + ".</div>";
-
-
-      //leave this line here. Deleting it will result in your css going AWOL.
+      function trace() {
+        viewer.clear();
+        viewer.trace('structure', structure);
+      }
+      function preset() {
+        viewer.clear();
+        var ligand = structure.select({rnames : ['RVP', 'SAH']});
+        viewer.ballsAndSticks('ligand', ligand);
+        viewer.cartoon('protein', structure);
+      }
+      function load(pdb_id) {
+        document.getElementById('status').innerHTML ='loading '+pdb_id;
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '../pdbs/'+pdb_id+'.pdb');
+        xhr.setRequestHeader('Content-type', 'application/x-pdb');
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState == 4) {
+            structure = pv.io.pdb(xhr.responseText);
+            preset();
+            viewer.centerOn(structure);
+          }
+          document.getElementById('status').innerHTML = '';
+        }
+        xhr.send();
+      }
+      function transferase() {
+        load('1r6a');
+      }
+      document.getElementById('cartoon').onclick = cartoon;
+      document.getElementById('line-trace').onclick = lineTrace;
+      document.getElementById('preset').onclick = preset;
+      document.getElementById('lines').onclick = lines;
+      document.getElementById('trace').onclick = trace;
+      document.getElementById('sline').onclick = sline;
+      document.getElementById('tube').onclick = tube;
+      window.onresize = function(event) {
+        viewer.fitParent();
+      }
+      document.addEventListener('DOMContentLoaded', transferase);
       addStylesIfNeeded();
     }
   }
