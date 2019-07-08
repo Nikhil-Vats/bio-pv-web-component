@@ -39,11 +39,14 @@ function initComponent(options) {
     set: () => {}, //required to stop TypeError: setting getter-only property "x"
     connect: (host, key) => {
       var viewer = pv.Viewer(document.getElementById('bio-pv-web'), {
-        quality: 'medium',
+        quality: host.getAttribute("quality"),
         width: 'auto',
         height: 'auto',
         antialias: true,
-        outline: true
+        outline: true,
+        animateTime: host.getAttribute("animateTime"),
+        background: host.getAttribute("background-color"),
+        fov: host.getAttribute("fov")
       });
       var structure;
       function lines() {
@@ -52,7 +55,7 @@ function initComponent(options) {
       }
       function cartoon() {
         viewer.clear();
-        viewer.cartoon('structure', structure, { color: color.ssSuccession() });
+        viewer.cartoon('structure', structure, {color: pv.color.ssSuccession()});
       }
       function lineTrace() {
         viewer.clear();
