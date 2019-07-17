@@ -21,7 +21,7 @@ This links to the relevant scripts to define the component and fetch data.
 Where you want your WebComponent to appear, add the following:
 
 ```html
-<bio-pv-web id="bio-pv-web>
+<bio-pv-web id="bio-pv-web">
  </bio-pv-web>
 ```
 
