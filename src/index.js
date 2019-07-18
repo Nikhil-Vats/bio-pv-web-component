@@ -42,13 +42,14 @@ function initComponent(options) {
         quality: host.getAttribute("quality"),
         width: 'auto',
         height: 'auto',
-        antialias: true,
-        outline: true,
+        antialias: host.getAttribute("antialias") ? true : false,
+        outline: host.getAttribute("outline") === "true" ? true : false,
         animateTime: host.getAttribute("animateTime"),
         background: host.getAttribute("background-color"),
         fov: host.getAttribute("fov")
       });
       var structure;
+      var style = host.getAttribute('structureStyle');
       function lines() {
         viewer.clear();
         viewer.lines('structure', structure);
@@ -89,7 +90,12 @@ function initComponent(options) {
         xhr.onreadystatechange = function() {
           if (xhr.readyState == 4) {
             structure = pv.io.pdb(xhr.responseText);
-            preset();
+            // preset();
+            if(style === 'cartoon') {
+              viewer.renderAs('structure',structure, host.getAttribute('structureStyle'), {color: pv.color.ssSuccession()});
+            } else {
+              viewer.renderAs('structure',structure, host.getAttribute('structureStyle'));
+            }
             viewer.centerOn(structure);
           }
           document.getElementById('status').innerHTML = '';
@@ -99,13 +105,6 @@ function initComponent(options) {
       function transferase() {
         load('1r6a');
       }
-      document.getElementById('cartoon').onclick = cartoon;
-      document.getElementById('line-trace').onclick = lineTrace;
-      document.getElementById('preset').onclick = preset;
-      document.getElementById('lines').onclick = lines;
-      document.getElementById('trace').onclick = trace;
-      document.getElementById('sline').onclick = sline;
-      document.getElementById('tube').onclick = tube;
       window.onresize = function(event) {
         viewer.fitParent();
       }

@@ -36,64 +36,17 @@
       left:0px;
       right:0px;
     }
-    #inspector {
-      top:10px;
-      left:10px;
-      box-shadow: 2px 2px 5px #888888;
-      border-radius:8px;
-      position:absolute;
-      background-color:#fafafa;
-      padding:10px;
-      border-style:solid;
-      border-width:1px;
-      border-color:#ccc;
-    }
-
-    #inspector ul {
-      padding:0px;
-    }
-
-    #inspector ul li {
-      margin-left:5px;
-      margin-right:5px;
-      margin-bottom:5px;
-      list-style:none;
-      cursor: pointer;
-      color:#393
-    }
-
-    #inspector ul li:hover {
-      color:#994444;
-    }
-    #inspector h1 {
-      font-weight:normal;
-      font-size:12pt;
-    }
   </style>
 </head>
 
 <body class="demo">
 
-  <h1>Protein Viewer demo</h1>
+  <h1 style="position: absolute;z-index:10;">Protein Viewer demo</h1>
 
   <!-- the geneId param below can be removed if needed - it's just an example of
        how to pass values to the component's JS behaviours. -->
-  <bio-pv-web id="bio-pv-web" structure="sline" quality="high" animateTime="2" fov="45" color="red"></bio-pv-web>
-  <div id=inspector>
-    <h1>Choose Style</h1>
-    <ul>
-      <li id=preset>Preset</li>
-      <li id=cartoon>Cartoon</li>
-      <li id=tube>Tube</li>
-      <li id=lines>Lines</li>
-      <li id=line-trace>Line Trace</li>
-      <li id=sline>Smooth Line Trace</li>
-      <li id=trace>Trace</li>
-    </ul>
-
-    <span><a href='index.html'>About</a> | Code on <a href="http://github.com/biasmv/pv">github.com</a></span>
-  </div>
-  <div id=status>initialising...</div>
+  <bio-pv-web id="bio-pv-web" quality="high" structureStyle="cartoon" background-color="white" animateTime="2" fov="45" width="auto" height="auto" slabMode="auto" fog="true" outline="true" ></bio-pv-web>
+  <div id="status">initialising...</div>
 </body>
 
 </html>
