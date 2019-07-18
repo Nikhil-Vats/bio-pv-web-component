@@ -11,20 +11,26 @@ Hey! If you'd like to use this component on your webpage, please do the followin
 <!-- the library for the webcomponent -->
 <script src="dist/bundle.js" type="module"></script>
 ```
-
-Also download the 1r6a.pdb file from pdbs folder.
+You should have a dist folder with bundle.js and 1r6a.pdb in your directory just like this repository. You can import it from this repository.
 
 This links to the relevant scripts to define the component and fetch data.
 
 ### In the `<body>`
 
-Where you want your WebComponent to appear, add the following:
+Where you want your Web Component to appear, add the following:
 
 ```html
-<bio-pv-web id="bio-pv-web">
- </bio-pv-web>
+<bio-pv-web id="bio-pv-web" quality="high" structureStyle="tube" fov="45" background-color="white" outline="true"></bio-pv-web>
 ```
 
+### Attributes:
+| Attribute | Accepted Values | Mandatory |
+| --------- | --------------- | --------- |
+| ```quality```| high, low. | Yes |
+|```structureStyle```| tube, sline, lines, lineTrace, trace, cartoon | Yes |
+|```fov``` (field of view)| 0 - 360 | Yes |
+|```background-color```| any valid identifier or rgb value or hex code | No (default is white) |
+|```outline```| true, false | No (default is false) |
 ## Licence
 
 
