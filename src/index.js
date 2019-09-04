@@ -85,7 +85,7 @@ function initComponent(options) {
       function load(pdb_id) {
         document.getElementById('status').innerHTML ='loading '+pdb_id;
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', './dist/'+pdb_id+'.pdb');
+        xhr.open('GET', '/dist/'+pdb_id+'.pdb');
         xhr.setRequestHeader('Content-type', 'application/x-pdb');
         xhr.onreadystatechange = function() {
           if (xhr.readyState == 4) {
@@ -108,6 +108,14 @@ function initComponent(options) {
       window.onresize = function(event) {
         viewer.fitParent();
       }
+      document.getElementById('cartoon').onclick = cartoon;
+      document.getElementById('line-trace').onclick = lineTrace;
+      document.getElementById('preset').onclick = preset;
+      document.getElementById('lines').onclick = lines;
+      document.getElementById('trace').onclick = trace;
+      document.getElementById('sline').onclick = sline;
+      document.getElementById('tube').onclick = tube;
+    
       document.addEventListener('DOMContentLoaded', transferase);
       addStylesIfNeeded();
     }
