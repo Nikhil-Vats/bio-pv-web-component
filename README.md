@@ -11,7 +11,7 @@ Hey! If you'd like to use this component on your webpage, please do the followin
 <!-- the library for the webcomponent -->
 <script src="dist/bundle.js" type="module"></script>
 ```
-You should have a dist folder with bundle.js and 1r6a.pdb in your directory just like this repository. You can import it from this repository.
+You should have a dist folder with bundle.js in your directory just like this repository. The pdb file should be in the same directory (at the same level) as index.html. You can import it from this repository.
 
 This links to the relevant scripts to define the component and fetch data.
 
